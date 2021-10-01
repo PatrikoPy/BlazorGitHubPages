@@ -12,9 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2
-        - name: Add .nojekyll file
-          run: touch release/wwwroot/.nojekyll
-          
+        
         # sets up .NET Core SDK 3.1
         - name: Setup .NET Core SDK
           uses: actions/setup-dotnet@v1
@@ -28,6 +26,10 @@ jobs:
           # changes the base-tag in index.html from '/' to 'BlazorGitHubPages' to match GitHub Pages repository subdirectory
         - name: Change base-tag in index.html from / to BlazorGitHubPages
           run: sed -i 's/<base href="\/" \/>/<base href="\/BlazorGitHubPages\/" \/>/g' release/wwwroot/index.html
+          
+        - name: Add .nojekyll file
+          run: touch release/wwwroot/.nojekyll
+          
         - name: Commit wwwroot to GitHub Pages
           uses: JamesIves/github-pages-deploy-action@4.1.5
           with:
