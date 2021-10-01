@@ -12,7 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2
-        
+        - name: Add .nojekyll file
+          run: touch release/wwwroot/.nojekyll
+          
         # sets up .NET Core SDK 3.1
         - name: Setup .NET Core SDK
           uses: actions/setup-dotnet@v1
